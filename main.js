@@ -28,6 +28,11 @@ class Consumer {
         this.privateKey = fs.readFileSync(privateKey).toString()
         this.server = dgram.createSocket('udp4')
         this.events = new EventEmitter()
+        this.port = 5992
+    }
+
+    SetPort(port) {
+        this.port = port
     }
 
     Listen() {
@@ -56,7 +61,7 @@ class Consumer {
             console.log(`Consumer listening ${address.address}:${address.port}`)
         })
 
-        this.server.bind(5992)
+        this.server.bind(this.port)
     }
 
 }
