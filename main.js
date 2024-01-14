@@ -45,6 +45,11 @@ class Consumer {
         this.server = dgram.createSocket('udp4')
         this.events = new EventEmitter()
         this.port = 5992
+        this.key = ""
+    }
+
+    ConfigureKey(key) {
+        this.key = key
     }
 
     SetPort(port) {
@@ -70,6 +75,16 @@ class Consumer {
                 },
                 msg
             )
+
+            if (decrypted.toString().split("\r\n")[0].split("ENQUEUE").length > 1) {
+                // If a key was provided the listener will only accept messages with the same set key
+                if (this.key !== "") {
+                    if (this.key !== decrypted.toString().split("\r\n")[0].split("ENQUEUE")[1].trim()) {
+                        return
+                    }
+                }
+
+            }
 
             if (lastTimestamp === decrypted.toString().split("\r\n")[1]) {
                 return
