@@ -1,0 +1,26 @@
+{
+  "name": "fairymq-consumer-nodejs",
+  "version": "1.0.0",
+  "description": "fairyMQ Node.JS Consumer",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fairymq/fairymq-consumer-nodejs.git"
+  },
+  "keywords": [
+    "event",
+    "streaming",
+    "message",
+    "queue"
+  ],
+  "author": "fairyMQ",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/fairymq/fairymq-consumer-nodejs/issues"
+  },
+  "homepage": "https://github.com/fairymq/fairymq-consumer-nodejs#readme"
+}
