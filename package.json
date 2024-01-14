@@ -1,6 +1,6 @@
 {
   "name": "fairymq-consumer-nodejs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "fairyMQ Node.JS Consumer",
   "main": "main.js",
   "type": "module",
