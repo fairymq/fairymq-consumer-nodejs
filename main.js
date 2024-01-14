@@ -78,6 +78,8 @@ class Consumer {
             lastTimestamp = decrypted.toString().split("\r\n")[1]
             const bufferArray = splitBuf(decrypted, "\r\n")
             obj.events.emit('event', bufferArray[bufferArray.length-1].slice(1))
+            let ack = Buffer.from("ACK\r\n", 'utf-8');
+            this.server.send(ack, 0, ack.length, rinfo.port, rinfo.address )
         })
 
         this.server.on('listening', () => {
