@@ -17,7 +17,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net from 'node:net'
 import EventEmitter from 'node:events'
 import * as fs from 'node:fs'
 import * as dgram from 'node:dgram'
