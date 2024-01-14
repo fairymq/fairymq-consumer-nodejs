@@ -48,8 +48,7 @@ class Consumer {
             const decrypted = crypto.privateDecrypt(
                 {
                     key: this.privateKey,
-                    padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-                    oaepHash: "sha256",
+                    padding: crypto.constants.RSA_PKCS1_PADDING,
                 },
                 msg
             )
