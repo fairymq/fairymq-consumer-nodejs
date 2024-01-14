@@ -22,6 +22,22 @@ import * as fs from 'node:fs'
 import * as dgram from 'node:dgram'
 import crypto from 'crypto'
 
+function splitBuf(b, sep) {
+    const ret = [];
+    let s = 0;
+    let i = b.indexOf(sep, s);
+    while (i >= 0) {
+        if (i >= 0) {
+            ret.push(b.slice(s, i));
+        }
+        s = i + 1;
+        i = b.indexOf(sep, s);
+    }
+    ret.push(b.slice(s));
+    return ret;
+}
+
+
 class Consumer {
 
     constructor(privateKey) {
@@ -38,6 +54,8 @@ class Consumer {
     Listen() {
         let obj = this
 
+        let lastTimestamp = 0;
+
         this.server.on('error', (err) => {
             console.error(`server error:\n${err.stack}`)
             server.close()
@@ -52,7 +70,14 @@ class Consumer {
                 },
                 msg
             )
-            obj.events.emit('event', decrypted)
+
+            if (lastTimestamp === decrypted.toString().split("\r\n")[1]) {
+                return
+            }
+
+            lastTimestamp = decrypted.toString().split("\r\n")[1]
+            const bufferArray = splitBuf(decrypted, "\r\n")
+            obj.events.emit('event', bufferArray[bufferArray.length-1].slice(1))
         })
 
         this.server.on('listening', () => {
