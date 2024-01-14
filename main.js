@@ -19,15 +19,15 @@
 
 import net from 'node:net'
 import EventEmitter from 'node:events'
-import readFileSync from 'node:fs'
-import createSocket from 'node:dgram'
+import * as fs from 'node:fs'
+import * as dgram from 'node:dgram'
 import crypto from 'crypto'
 
 class Consumer {
 
     constructor(privateKey) {
-        this.privateKey = readFileSync('privateKey').toString()
-        this.server = createSocket('udp4')
+        this.privateKey = fs.readFileSync(privateKey).toString()
+        this.server = dgram.createSocket('udp4')
         this.events = new EventEmitter()
     }
 
